@@ -33,26 +33,26 @@
         android:layout_height="50dp"
         android:text="Login"
         android:id="@+id/loginButton"
-        android:layout_marginLeft="30dp"
+        android:layout_marginLeft="40dp"
         android:layout_alignBottom="@+id/backgroundImageView"
-        android:background="@color/colorRedTeam"
         android:textColor="@android:color/white"
-        android:textSize="18sp"
+        android:textSize="24sp"
         android:layout_alignParentEnd="false"
         android:layout_alignParentRight="false"
-        android:layout_marginBottom="30dp" />
+        android:layout_marginBottom="35dp"
+        android:background="#00000000" />
 
     <Button
         android:layout_width="160dp"
         android:layout_height="50dp"
         android:text="Sign Up"
         android:id="@+id/signUpButton"
-        android:layout_marginRight="30dp"
+        android:layout_marginRight="40dp"
         android:layout_alignBottom="@+id/backgroundImageView"
         android:textColor="@android:color/white"
-        android:background="@color/colorBlueTeam"
-        android:textSize="18sp"
+        android:textSize="24sp"
         android:layout_alignRight="@+id/backgroundImageView"
-        android:layout_marginBottom="30dp" />
+        android:layout_marginBottom="35dp"
+        android:background="#00000000" />
 
 </RelativeLayout>
