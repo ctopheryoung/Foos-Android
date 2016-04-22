@@ -31,7 +31,7 @@
     <Button
         android:layout_width="160dp"
         android:layout_height="50dp"
-        android:text="Login"
+        android:text="Log In"
         android:id="@+id/loginButton"
         android:layout_marginLeft="40dp"
         android:layout_alignBottom="@+id/backgroundImageView"
