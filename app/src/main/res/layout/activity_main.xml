@@ -15,7 +15,7 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:cropToPadding="false"
-        android:tint="#4b41260a" />
+        android:tint="#4b455a64" />
 
     <ImageView
         android:layout_width="wrap_content"
@@ -45,7 +45,7 @@
             android:id="@+id/loginButton"
             android:textColor="@android:color/white"
             android:textStyle="bold"
-            android:textSize="35sp"
+            android:textSize="40sp"
             android:textAlignment="center" />
 
         <TextView
@@ -55,7 +55,7 @@
             android:text="SIGN UP"
             android:id="@+id/signUpButton"
             android:textColor="@android:color/white"
-            android:textSize="35sp"
+            android:textSize="40sp"
             android:textStyle="bold"
             android:textAlignment="center" />
 
