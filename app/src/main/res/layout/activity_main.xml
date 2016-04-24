@@ -15,17 +15,17 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:cropToPadding="false"
-        android:tint="#4b455a64" />
+        android:tint="#4b263238" />
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="200dp"
         android:id="@+id/logoImageView"
         android:src="@drawable/fooslogocolor"
-        android:layout_marginTop="76dp"
+        android:layout_marginTop="100dp"
         android:layout_alignParentTop="true"
-        android:layout_alignLeft="@+id/backgroundImageView"
-        android:layout_alignStart="@+id/backgroundImageView" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
 
 

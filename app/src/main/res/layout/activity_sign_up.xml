@@ -20,14 +20,15 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New Account"
+        android:text="NEW ACCOUNT"
         android:id="@+id/headingTextView"
         android:textColor="@color/colorAccent"
         android:textSize="50sp"
         android:textAlignment="center"
         android:layout_marginBottom="50dp"
         android:layout_alignBottom="@+id/nameEditText"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:textStyle="bold" />
 
     <EditText
         android:layout_width="fill_parent"
