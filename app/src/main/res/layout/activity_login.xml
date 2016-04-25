@@ -15,7 +15,7 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:cropToPadding="false"
-        android:tint="#4b455a64" />
+        android:tint="#4b263238" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -23,12 +23,11 @@
         android:text="LOG IN"
         android:id="@+id/headingTextView"
         android:textColor="@color/colorAccent"
-        android:textSize="50sp"
-        android:layout_alignParentTop="true"
-        android:layout_margin="80dp"
+        android:textSize="40sp"
         android:textAlignment="center"
+        android:textStyle="bold"
         android:layout_centerHorizontal="true"
-        android:textStyle="bold" />
+        android:layout_marginTop="30dp" />
 
     <EditText
         android:layout_width="fill_parent"
@@ -66,7 +65,7 @@
         android:layout_height="wrap_content"
         android:text="CONTINUE"
         android:id="@+id/loginButton"
-        android:textColor="@color/colorPrimaryLight"
+        android:textColor="@android:color/white"
         android:textStyle="bold"
         android:textSize="35sp"
         android:textAlignment="center"
