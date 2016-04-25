@@ -3,10 +3,57 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="xyz.chrisyoung.foos.HomeActivity">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/welcomeTextView"
+        android:textSize="22sp"
+        android:text="Welcome, USERNAME"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Leaderboard:"
+        android:id="@+id/recentMatchesTextView"
+        android:textSize="20sp"
+        android:layout_marginTop="18dp"
+        android:layout_below="@+id/welcomeTextView"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/leaderboard"
+        android:layout_below="@+id/recentMatchesTextView"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_above="@+id/addMatchButton"
+        android:layout_marginTop="5dp" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Add a Match"
+        android:id="@+id/addMatchButton"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Your rating: ###"
+        android:id="@+id/ratingTextView"
+        android:textSize="18sp"
+        android:layout_alignBottom="@+id/welcomeTextView"
+        android:layout_alignRight="@+id/leaderboard"
+        android:layout_alignEnd="@+id/leaderboard" />
 </RelativeLayout>
