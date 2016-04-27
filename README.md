@@ -1,6 +1,6 @@
 # FOOS
 
-##### Foosball league, leaderboards and social platform | April 22, 2016
+##### Foosball social platform and league with leaderboards  | April 2016
 
 #### By Chris Young
 
