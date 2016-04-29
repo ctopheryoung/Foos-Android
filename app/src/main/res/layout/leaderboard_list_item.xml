@@ -8,70 +8,65 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:background="#ffffff"
-        android:layout_height="match_parent"
-        android:padding="10dp"
-        android:weightSum="1">
+        android:layout_height="wrap_content"
+        android:weightSum="1"
+        android:layout_margin="5dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/lbRankTextView"
-            android:textSize="20dp"
+            android:textSize="25dp"
             android:textStyle="bold"
-            android:text="1."
-            android:textColor="@color/colorPrimary"/>
+            android:text="1"
+            android:textColor="@color/colorPrimary"
+            android:layout_marginRight="6dp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="First Lastname"
-            android:id="@+id/lbNameTextView"
-            android:layout_below="@+id/restaurantNameTextView"
-            android:textSize="18dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginLeft="4dp"
-            android:layout_weight="1.01" />
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="170dp"
-            android:layout_height="match_parent"
-            android:layout_centerHorizontal="true"
-            android:layout_weight="0.13"
-            android:layout_gravity="right"
-            android:layout_marginRight="6dp">
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:textAlignment="center"
+                android:text="First Lastname"
+                android:id="@+id/lbNameTextView"
+                android:textSize="18dp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:text="Sk"
-                android:id="@+id/textView"
+                android:id="@+id/skillTextView"
+                android:layout_centerVertical="true"
                 android:textSize="18sp"
-                android:layout_gravity="bottom" />
+                android:layout_toLeftOf="@+id/winsTextView"
+                android:layout_marginRight="25dp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:textAlignment="center"
                 android:text="W"
-                android:id="@+id/textView3"
-                android:layout_gravity="bottom|center_horizontal"
-                android:textSize="18sp" />
+                android:id="@+id/winsTextView"
+                android:layout_centerVertical="true"
+                android:textSize="18sp"
+                android:layout_toLeftOf="@+id/lossesTextView"
+                android:layout_marginRight="25dp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:textAlignment="center"
                 android:text="L"
-                android:id="@+id/textView2"
+                android:id="@+id/lossesTextView"
+                android:layout_centerVertical="true"
                 android:textSize="18sp"
-                android:layout_gravity="bottom" />
-        </LinearLayout>
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="25dp" />
+
+        </RelativeLayout>
 
     </LinearLayout>
 </LinearLayout>
