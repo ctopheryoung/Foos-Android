@@ -30,7 +30,7 @@
         android:layout_marginLeft="35dp"
         android:layout_marginRight="35dp"
         android:textColorHint="@android:color/white"
-        android:textColor="@color/colorPrimaryLight"
+        android:textColor="@android:color/white"
         android:layout_marginTop="180dp" />
 
     <EditText
@@ -46,7 +46,7 @@
         android:layout_marginLeft="35dp"
         android:layout_marginRight="35dp"
         android:textColorHint="@android:color/white"
-        android:textColor="@color/colorPrimaryLight" />
+        android:textColor="@android:color/white" />
 
 
     <TextView
