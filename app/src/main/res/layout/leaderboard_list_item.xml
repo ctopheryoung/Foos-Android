@@ -15,7 +15,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/lbRankTextView"
+            android:id="@+id/rankTextView"
             android:textSize="25dp"
             android:textStyle="bold"
             android:text="1"
@@ -30,7 +30,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="First Lastname"
-                android:id="@+id/lbNameTextView"
+                android:id="@+id/nameTextView"
                 android:textSize="18dp"
                 android:layout_centerVertical="true"
                 android:layout_alignParentLeft="true"
