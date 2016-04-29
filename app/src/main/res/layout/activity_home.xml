@@ -3,8 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="xyz.chrisyoung.foos.HomeActivity">
 
@@ -12,32 +10,64 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/welcomeTextView"
-        android:textSize="22sp"
-        android:text="Welcome, USERNAME"
+        android:textSize="25sp"
+        android:text="Chris Young"
+        android:layout_centerHorizontal="true"
         android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_marginBottom="5dp"
+        android:textStyle="bold" />
 
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Leaderboard:"
-        android:id="@+id/recentMatchesTextView"
-        android:textSize="20sp"
-        android:layout_marginTop="18dp"
         android:layout_below="@+id/welcomeTextView"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:id="@+id/linearLayout">
 
-    <ListView
-        android:layout_width="wrap_content"
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Rank: 3 of 15"
+            android:id="@+id/rankingTextView"
+            android:textSize="18sp"
+            android:layout_below="@+id/welcomeTextView"
+            android:textAlignment="center"
+            android:layout_weight="1"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Skill Rating: 25"
+            android:id="@+id/ratingTextView"
+            android:textSize="18sp"
+            android:layout_below="@+id/welcomeTextView"
+            android:textAlignment="center"
+            android:layout_weight="1"/>
+    </LinearLayout>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewPager"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/leaderboard"
-        android:layout_below="@+id/recentMatchesTextView"
+        android:layout_below="@+id/linearLayout"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_above="@+id/addMatchButton"
-        android:layout_marginTop="5dp" />
+        android:layout_above="@+id/addMatchButton">
+
+        <android.support.v4.view.PagerTabStrip
+            android:id="@+id/pagerHeader"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/recyclerView"/>
+
+    </android.support.v4.view.ViewPager>
 
     <Button
         android:layout_width="match_parent"
@@ -47,13 +77,4 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Your rating: ###"
-        android:id="@+id/ratingTextView"
-        android:textSize="18sp"
-        android:layout_alignBottom="@+id/welcomeTextView"
-        android:layout_alignRight="@+id/leaderboard"
-        android:layout_alignEnd="@+id/leaderboard" />
 </RelativeLayout>
