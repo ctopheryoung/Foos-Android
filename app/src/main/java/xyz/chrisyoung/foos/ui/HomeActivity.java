@@ -1,11 +1,9 @@
-package xyz.chrisyoung.foos;
+package xyz.chrisyoung.foos.ui;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.Collection;
@@ -21,12 +19,12 @@ import jskills.Player;
 import jskills.Rating;
 import jskills.Team;
 import jskills.TrueSkillCalculator;
+import xyz.chrisyoung.foos.R;
 
 public class HomeActivity extends AppCompatActivity {
     public static final String TAG = MainActivity.class.getSimpleName();
 
     @Bind(R.id.welcomeTextView) TextView mWelcomeTextView;
-    @Bind(R.id.leaderboard) ListView mLeaderboard;
     @Bind(R.id.ratingTextView) TextView mRatingTextView;
 
     public String[] players = new String[] {"Summer", "Cooper", "Sarah", "Eric", "Chris", "Ben", "7. Emily", "8. Mike", "9. Matt", "10. Nolan", "11. Steve", "12. Michelle", "13. Mary", "14. Ramone", "15. Trevor"};
@@ -37,19 +35,16 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
         ButterKnife.bind(this);
 
-        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, players);
-        mLeaderboard.setAdapter(adapter);
-
         Intent intent = getIntent();
         String userEmail = intent.getStringExtra("userEmail");
         mWelcomeTextView.setText("Welcome, " + userEmail);
 
 
-        //TRUESKILL RANKING EXPLORATION
+        //TRUE SKILL RANKING EXPLORATION
 
         //Creates new players with Ids
-        Player<Integer> player1 = new Player<Integer>(1);
-        Player<Integer> player2 = new Player<Integer>(2);
+        Player<Integer> player1 = new Player<>(1);
+        Player<Integer> player2 = new Player<>(2);
 
         GameInfo gameInfo = GameInfo.getDefaultGameInfo();
 

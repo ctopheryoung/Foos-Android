@@ -1,4 +1,4 @@
-package xyz.chrisyoung.foos;
+package xyz.chrisyoung.foos.ui;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import xyz.chrisyoung.foos.R;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
     @Bind(R.id.loginButton) TextView mLoginButton;
