@@ -1,7 +1,9 @@
-package xyz.chrisyoung.foos;
+package xyz.chrisyoung.foos.ui;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import xyz.chrisyoung.foos.R;
 
 public class SignUpActivity extends AppCompatActivity {
 
