@@ -8,52 +8,46 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-
-import butterknife.Bind;
 import xyz.chrisyoung.foos.R;
-import xyz.chrisyoung.foos.adapters.LeaderboardListAdapter;
-import xyz.chrisyoung.foos.models.User;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class LeaderboardFragment extends Fragment {
+public class GameFeedFragment extends Fragment {
     // Store instance variables
-    public static final String TAG = LeaderboardFragment.class.getSimpleName();
-    private LeaderboardListAdapter mLeaderboardListAdapter;
-    public ArrayList<User> mUsers = new ArrayList<>();
+    private String title;
+    private int page;
 
-    @Bind(R.id.)
-
-    //Put hard-coded data here
-
-    public LeaderboardFragment() {
+    public GameFeedFragment() {
         // Required empty public constructor
     }
 
+
     // newInstance constructor for creating fragment with arguments
-    public static LeaderboardFragment newInstance(int page, String title) {
-        LeaderboardFragment fragmentLeaderboard = new LeaderboardFragment();
+    public static GameFeedFragment newInstance(int page, String title) {
+        GameFeedFragment fragmentGameFeed = new GameFeedFragment();
         Bundle args = new Bundle();
         args.putInt("someInt", page);
         args.putString("someTitle", title);
-        fragmentLeaderboard.setArguments(args);
-        return fragmentLeaderboard;
+        fragmentGameFeed.setArguments(args);
+        return fragmentGameFeed;
     }
 
     // Store instance variables based on arguments passed
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        page = getArguments().getInt("someInt", 0);
+        title = getArguments().getString("someTitle");
     }
 
     // Inflate the view for the fragment based on layout XML
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_leaderboard, container, false);
+        View view = inflater.inflate(R.layout.fragment_game_feed, container, false);
+//        TextView tvLabel = (TextView) view.findViewById(R.id.tvLabel);
+//        tvLabel.setText(page + " -- " + title);
         return view;
     }
 }

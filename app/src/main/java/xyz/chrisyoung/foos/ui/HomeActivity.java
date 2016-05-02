@@ -1,6 +1,8 @@
 package xyz.chrisyoung.foos.ui;
 
 import android.content.Intent;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -20,6 +22,7 @@ import jskills.Rating;
 import jskills.Team;
 import jskills.TrueSkillCalculator;
 import xyz.chrisyoung.foos.R;
+import xyz.chrisyoung.foos.adapters.HomeFragmentAdapter;
 
 public class HomeActivity extends AppCompatActivity {
     public static final String TAG = MainActivity.class.getSimpleName();
@@ -27,12 +30,19 @@ public class HomeActivity extends AppCompatActivity {
     @Bind(R.id.welcomeTextView) TextView mWelcomeTextView;
     @Bind(R.id.ratingTextView) TextView mRatingTextView;
 
-    public String[] players = new String[] {"Summer", "Cooper", "Sarah", "Eric", "Chris", "Ben", "7. Emily", "8. Mike", "9. Matt", "10. Nolan", "11. Steve", "12. Michelle", "13. Mary", "14. Ramone", "15. Trevor"};
+    FragmentPagerAdapter adapterViewPager;
+
+    public String[] players = new String[] {"Summer", "Cooper", "Sarah", "Eric", "Chris", "Ben"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        ViewPager vpPager = (ViewPager) findViewById(R.id.vpPager);
+        adapterViewPager = new HomeFragmentAdapter(getSupportFragmentManager());
+        vpPager.setAdapter(adapterViewPager);
+
         ButterKnife.bind(this);
 
         Intent intent = getIntent();
@@ -48,7 +58,6 @@ public class HomeActivity extends AppCompatActivity {
 
         GameInfo gameInfo = GameInfo.getDefaultGameInfo();
 
-        Log.d(TAG, "Initial Player 1: " + player1);
 
         //Sets up Game with each player on their own team vs each other
         Team team1 = new Team(player1, gameInfo.getDefaultRating());
