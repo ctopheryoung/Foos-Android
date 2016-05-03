@@ -24,12 +24,8 @@ public class GameFeedFragment extends Fragment {
 
 
     // newInstance constructor for creating fragment with arguments
-    public static GameFeedFragment newInstance(int page, String title) {
+    public static GameFeedFragment newInstance(int page) {
         GameFeedFragment fragmentGameFeed = new GameFeedFragment();
-        Bundle args = new Bundle();
-        args.putInt("someInt", page);
-        args.putString("someTitle", title);
-        fragmentGameFeed.setArguments(args);
         return fragmentGameFeed;
     }
 
@@ -37,8 +33,6 @@ public class GameFeedFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        page = getArguments().getInt("someInt", 0);
-        title = getArguments().getString("someTitle");
     }
 
     // Inflate the view for the fragment based on layout XML
@@ -46,8 +40,6 @@ public class GameFeedFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_game_feed, container, false);
-//        TextView tvLabel = (TextView) view.findViewById(R.id.tvLabel);
-//        tvLabel.setText(page + " -- " + title);
         return view;
     }
 }

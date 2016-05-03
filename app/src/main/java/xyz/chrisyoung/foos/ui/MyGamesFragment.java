@@ -24,12 +24,8 @@ public class MyGamesFragment extends Fragment {
 
 
     // newInstance constructor for creating fragment with arguments
-    public static MyGamesFragment newInstance(int page, String title) {
+    public static MyGamesFragment newInstance(int page) {
         MyGamesFragment fragmentMyGames = new MyGamesFragment();
-        Bundle args = new Bundle();
-        args.putInt("someInt", page);
-        args.putString("someTitle", title);
-        fragmentMyGames.setArguments(args);
         return fragmentMyGames;
     }
 
@@ -37,8 +33,6 @@ public class MyGamesFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        page = getArguments().getInt("someInt", 0);
-        title = getArguments().getString("someTitle");
     }
 
     // Inflate the view for the fragment based on layout XML
@@ -46,8 +40,6 @@ public class MyGamesFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_my_games, container, false);
-//        TextView tvLabel = (TextView) view.findViewById(R.id.tvLabel);
-//        tvLabel.setText(page + " -- " + title);
         return view;
     }
 }

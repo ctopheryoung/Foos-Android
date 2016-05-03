@@ -29,11 +29,11 @@ public class HomeFragmentAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case 0: // Fragment # 0 - This will show FirstFragment
-                return LeaderboardFragment.newInstance(0, "Page # 1");
+                return LeaderboardFragment.newInstance(0);
             case 1: // Fragment # 0 - This will show FirstFragment different title
-                return GameFeedFragment.newInstance(1, "Page # 2");
+                return GameFeedFragment.newInstance(1);
             case 2: // Fragment # 1 - This will show SecondFragment
-                return MyGamesFragment.newInstance(2, "Page # 3");
+                return MyGamesFragment.newInstance(2);
             default:
                 return null;
         }

@@ -45,12 +45,8 @@ public class LeaderboardFragment extends Fragment {
     };
 
     // newInstance constructor for creating fragment with arguments
-    public static LeaderboardFragment newInstance(int page, String title) {
+    public static LeaderboardFragment newInstance(int page) {
         LeaderboardFragment fragmentLeaderboard = new LeaderboardFragment();
-        Bundle args = new Bundle();
-        args.putInt("someInt", page);
-        args.putString("someTitle", title);
-        fragmentLeaderboard.setArguments(args);
         return fragmentLeaderboard;
     }
 
