@@ -9,6 +9,8 @@ public class User {
     private String mLastName;
     private String mEmail;
     private int mGameCount = 0;
+    private int wins = 0;
+    private int losses = 0;
 
     public User() {}
 
@@ -60,5 +62,21 @@ public class User {
 
     public void setGameCount(int mGameCount) {
         this.mGameCount = mGameCount;
+    }
+
+    public int getWins() {
+        return wins;
+    }
+
+    public void setWins(int wins) {
+        this.wins = wins;
+    }
+
+    public int getLosses() {
+        return losses;
+    }
+
+    public void setLosses(int losses) {
+        this.losses = losses;
     }
 }
