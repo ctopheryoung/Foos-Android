@@ -2,6 +2,7 @@ package xyz.chrisyoung.foos.adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,7 @@ import xyz.chrisyoung.foos.models.User;
  * Created by topher on 4/29/16.
  */
 public class LeaderboardListAdapter extends RecyclerView.Adapter<LeaderboardListAdapter.UserViewHolder> {
+    public static final String TAG = LeaderboardListAdapter.class.getSimpleName();
     private ArrayList<User> mUsers = new ArrayList<>();
     private Context mContext;
 
@@ -59,6 +61,8 @@ public class LeaderboardListAdapter extends RecyclerView.Adapter<LeaderboardList
 
         public void bindUser(User user) {
             mNameTextView.setText(user.getFullName());
+            Integer rank = getAdapterPosition() + 1;
+            mRankTextView.setText(rank.toString());
         }
 
     }
