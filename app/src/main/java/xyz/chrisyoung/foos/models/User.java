@@ -10,6 +10,8 @@ public class User {
     private String mEmail;
     private int mGameCount = 0;
 
+    public User() {}
+
     public User (String firstName, String lastName, String email) {
         mFirstName = firstName;
         mLastName = lastName;
