@@ -46,7 +46,7 @@ public class LeaderboardListAdapter extends RecyclerView.Adapter<LeaderboardList
 
     public class UserViewHolder extends RecyclerView.ViewHolder {
         @Bind(R.id.rankTextView) TextView mRankTextView;
-        @Bind(R.id.resultTextView) TextView mResultTextView;
+        @Bind(R.id.nameTextView) TextView mNameTextView;
         @Bind(R.id.skillTextView) TextView mSkillTextView;
         @Bind(R.id.winsTextView) TextView mWinsTextView;
         @Bind(R.id.lossesTextView) TextView mLossesTextView;
@@ -59,9 +59,9 @@ public class LeaderboardListAdapter extends RecyclerView.Adapter<LeaderboardList
         }
 
         public void bindUser(User user) {
-            mResultTextView.setText(user.getFullName());
+            mNameTextView.setText(user.getFullName());
             Integer rank = getAdapterPosition() + 1;
-            mRankTextView.setText(rank.toString());
+            mRankTextView.setText(rank.toString() + ".");
         }
 
     }
