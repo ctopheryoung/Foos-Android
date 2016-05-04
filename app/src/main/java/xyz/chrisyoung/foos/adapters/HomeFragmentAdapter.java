@@ -28,11 +28,11 @@ public class HomeFragmentAdapter extends FragmentPagerAdapter {
     @Override
     public Fragment getItem(int position) {
         switch (position) {
-            case 0: // Fragment # 0 - This will show FirstFragment
+            case 0: // Fragment # 0 - This will show LeaderboardFragment
                 return LeaderboardFragment.newInstance(0);
-            case 1: // Fragment # 0 - This will show FirstFragment different title
+            case 1: // Fragment # 0 - This will show GameFeedFragment
                 return GameFeedFragment.newInstance(1);
-            case 2: // Fragment # 1 - This will show SecondFragment
+            case 2: // Fragment # 1 - This will show MyGamesFragment
                 return MyGamesFragment.newInstance(2);
             default:
                 return null;
@@ -46,7 +46,7 @@ public class HomeFragmentAdapter extends FragmentPagerAdapter {
             case 0:
                 return "Leaderboard";
             case 1:
-                return "Foos Game Feed";
+                return "All Games";
             case 2:
                 return "My Games";
             default:
