@@ -2,7 +2,6 @@ package xyz.chrisyoung.foos.adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,7 +46,7 @@ public class LeaderboardListAdapter extends RecyclerView.Adapter<LeaderboardList
 
     public class UserViewHolder extends RecyclerView.ViewHolder {
         @Bind(R.id.rankTextView) TextView mRankTextView;
-        @Bind(R.id.nameTextView) TextView mNameTextView;
+        @Bind(R.id.resultTextView) TextView mResultTextView;
         @Bind(R.id.skillTextView) TextView mSkillTextView;
         @Bind(R.id.winsTextView) TextView mWinsTextView;
         @Bind(R.id.lossesTextView) TextView mLossesTextView;
@@ -60,7 +59,7 @@ public class LeaderboardListAdapter extends RecyclerView.Adapter<LeaderboardList
         }
 
         public void bindUser(User user) {
-            mNameTextView.setText(user.getFullName());
+            mResultTextView.setText(user.getFullName());
             Integer rank = getAdapterPosition() + 1;
             mRankTextView.setText(rank.toString());
         }
