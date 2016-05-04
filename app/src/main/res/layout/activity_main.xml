@@ -8,13 +8,24 @@
 
     <ImageView
         android:layout_width="wrap_content"
-        android:layout_height="200dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/bgImageView"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:src="@drawable/bg"
+        android:scaleType="centerCrop"
+        android:tint="#802C3E50" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="250dp"
         android:id="@+id/logoImageView"
-        android:src="@drawable/fooslogocolor"
         android:layout_marginTop="100dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:src="@drawable/fooslogo" />
 
 
 
@@ -23,7 +34,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_alignParentBottom="true">
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="30dp">
 
         <TextView
             android:layout_width="wrap_content"
@@ -31,7 +43,7 @@
             android:layout_weight="1"
             android:text="LOG IN"
             android:id="@+id/loginButton"
-            android:textColor="@android:color/white"
+            android:textColor="@color/colorPrimaryLight"
             android:textStyle="bold"
             android:textSize="40sp"
             android:textAlignment="center" />
@@ -42,7 +54,7 @@
             android:layout_weight="1"
             android:text="SIGN UP"
             android:id="@+id/signUpButton"
-            android:textColor="@android:color/white"
+            android:textColor="@color/colorPrimaryLight"
             android:textSize="40sp"
             android:textStyle="bold"
             android:textAlignment="center" />
