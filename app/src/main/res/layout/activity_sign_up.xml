@@ -18,7 +18,7 @@
         android:layout_alignParentTop="false"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="30dp"
-        android:layout_marginTop="120dp" />
+        android:layout_marginTop="80dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -34,11 +34,11 @@
             android:hint="First Name"
             android:textColorHint="@color/colorPrimary"
             android:textColor="@color/colorAccentDark"
-            android:inputType="text"
             android:layout_centerHorizontal="true"
             android:layout_marginLeft="40dp"
             android:layout_marginBottom="30dp"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:inputType="textCapSentences" />
 
         <EditText
             android:layout_width="wrap_content"
@@ -48,11 +48,11 @@
             android:hint="Last Name"
             android:textColorHint="@color/colorPrimary"
             android:textColor="@color/colorAccentDark"
-            android:inputType="text"
             android:layout_centerHorizontal="true"
             android:layout_marginRight="40dp"
             android:layout_marginBottom="30dp"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:inputType="textCapSentences" />
     </LinearLayout>
 
     <EditText
