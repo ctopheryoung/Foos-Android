@@ -41,34 +41,34 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Sk"
+                android:text="25"
                 android:id="@+id/skillTextView"
                 android:layout_centerVertical="true"
                 android:textSize="18sp"
                 android:layout_toLeftOf="@+id/winsTextView"
-                android:layout_marginRight="25dp"
+                android:layout_marginRight="40dp"
                 android:layout_alignParentBottom="false" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="W"
+                android:text="0"
                 android:id="@+id/winsTextView"
                 android:layout_centerVertical="true"
                 android:textSize="18sp"
                 android:layout_toLeftOf="@+id/lossesTextView"
-                android:layout_marginRight="25dp"
+                android:layout_marginRight="40dp"
                 android:layout_alignParentBottom="false" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="L"
+                android:text="0"
                 android:id="@+id/lossesTextView"
                 android:layout_centerVertical="true"
                 android:textSize="18sp"
                 android:layout_alignParentRight="true"
-                android:layout_marginRight="25dp"
+                android:layout_marginRight="29dp"
                 android:layout_alignParentBottom="false" />
 
         </RelativeLayout>

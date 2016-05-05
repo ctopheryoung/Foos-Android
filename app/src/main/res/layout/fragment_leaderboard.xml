@@ -1,12 +1,79 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="xyz.chrisyoung.foos.ui.LeaderboardFragment">
+    tools:context="xyz.chrisyoung.foos.ui.LeaderboardFragment"
+    android:background="@color/colorPrimaryLight">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:background="@color/colorPrimaryLight"
+        android:layout_height="wrap_content"
+        android:weightSum="1"
+        android:layout_margin="5dp"
+        android:divider="@android:drawable/divider_horizontal_dim_dark"
+        android:id="@+id/linearLayout2">
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimaryLight">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Player"
+                android:id="@+id/nameLabelTextView"
+                android:textSize="14sp"
+                android:layout_alignParentLeft="false"
+                android:layout_alignParentStart="true"
+                android:textColor="@color/colorAccentDark"
+                android:layout_alignParentBottom="false"
+                android:layout_marginLeft="30dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Skill Points"
+                android:id="@+id/skillLabelTextView"
+                android:layout_centerVertical="true"
+                android:textSize="14sp"
+                android:layout_toLeftOf="@+id/winsLabelTextView"
+                android:layout_marginRight="12dp"
+                android:layout_alignParentBottom="false" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Wins"
+                android:id="@+id/winsLabelTextView"
+                android:layout_centerVertical="true"
+                android:textSize="14sp"
+                android:layout_toLeftOf="@+id/lossesLabelTextView"
+                android:layout_marginRight="12dp"
+                android:layout_alignParentBottom="false" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Losses"
+                android:id="@+id/lossesLabelTextView"
+                android:layout_centerVertical="true"
+                android:textSize="14sp"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="12dp"
+                android:layout_alignParentBottom="false" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
 
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/leaderboardRecyclerView"/>
+        android:id="@+id/leaderboardRecyclerView"
+        android:layout_below="@+id/linearLayout2"
+        android:background="@color/colorPrimaryLight" />
 
-</FrameLayout>
+</RelativeLayout>
