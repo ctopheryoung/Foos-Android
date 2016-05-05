@@ -4,48 +4,53 @@ package xyz.chrisyoung.foos.models;
  * Created by Guest on 4/28/16.
  */
 public class User {
-    private String mFirstName;
-    private String mLastName;
-    private String mEmail;
+    private String firstName;
+    private String lastName;
+    private String fullName;
+    private String email;
     private int wins = 0;
     private int losses = 0;
 
     public User() {}
 
-    public User (String firstName, String lastName, String email) {
-        mFirstName = firstName;
-        mLastName = lastName;
-        mEmail = email;
+    public User(String firstName, String lastName, String email) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.fullName = firstName + " " + lastName;
+        this.email = email;
     }
 
     public String getFirstName() {
-        return mFirstName;
+        return firstName;
     }
 
-    public void setFirstName(String mFirstName) {
-        this.mFirstName = mFirstName;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
     public String getLastName() {
-        return mLastName;
+        return lastName;
     }
 
-    public void setLastName(String mLastName) {
-        this.mLastName = mLastName;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getFullName() {
-        return mFirstName + " " + mLastName;
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
     public String getEmail() {
-        return mEmail;
+        return email;
     }
 
-    public void setEmail(String mEmail) {
-        this.mEmail = mEmail;
+    public void setEmail(String email) {
+        this.email = email;
     }
-
 
     public int getWins() {
         return wins;
