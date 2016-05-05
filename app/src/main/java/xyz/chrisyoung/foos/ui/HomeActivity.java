@@ -6,7 +6,12 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.TextView;
+
+import com.firebase.client.Firebase;
 
 import java.util.Collection;
 import java.util.Map;
@@ -21,11 +26,13 @@ import jskills.Player;
 import jskills.Rating;
 import jskills.Team;
 import jskills.TrueSkillCalculator;
+import xyz.chrisyoung.foos.Constants;
 import xyz.chrisyoung.foos.R;
 import xyz.chrisyoung.foos.adapters.HomeFragmentAdapter;
 
 public class HomeActivity extends AppCompatActivity {
     public static final String TAG = MainActivity.class.getSimpleName();
+    private Firebase mFirebaseRef;
 
     @Bind(R.id.welcomeTextView) TextView mWelcomeTextView;
     @Bind(R.id.ratingTextView) TextView mRatingTextView;
@@ -38,6 +45,7 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        mFirebaseRef = new Firebase(Constants.FIREBASE_URL);
 
         ViewPager vpPager = (ViewPager) findViewById(R.id.vpPager);
         adapterViewPager = new HomeFragmentAdapter(getSupportFragmentManager());
@@ -84,5 +92,34 @@ public class HomeActivity extends AppCompatActivity {
         player1Rating = newRatings2.get(player1);
 
         Log.d(TAG, "Player 1, game 2: " + player1Rating);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.action_logout) {
+            logout();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    protected void logout() {
+        mFirebaseRef.unauth();
+        takeUserToMainOnUnAuth();
+    }
+
+    private void takeUserToMainOnUnAuth() {
+        Intent intent = new Intent(HomeActivity.this, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        finish();
     }
 }
