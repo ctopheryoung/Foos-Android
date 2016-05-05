@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="xyz.chrisyoung.foos.ui.RecordGameActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Enter Result"
+        android:id="@+id/headingTextView"
+        android:layout_marginTop="50dp"
+        android:textSize="40sp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="30dp" />
+
+    <LinearLayout
+        android:id="@+id/playerOneInfo"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/headingTextView"
+        android:layout_margin="10dp">
+
+        <TextView
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:text="Game Winner:"
+            android:id="@+id/winnerLabelTextView"
+            android:textSize="20sp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="30dp" />
+
+        <!--<Spinner-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:id="@+id/winnerSpinner"-->
+            <!--android:spinnerMode="dropdown"-->
+            <!--android:layout_weight="1"-->
+            <!--android:layout_gravity="center_vertical" />-->
+
+        <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/winnerSpinner"
+        android:spinnerMode="dropdown"
+        android:layout_weight="1"
+        android:layout_gravity="center_vertical"
+            android:hint="Player Name" />
+
+        <EditText
+            android:layout_width="55dp"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:ems="10"
+            android:id="@+id/winnerScoreEditText"
+            android:hint="Score"
+            android:layout_gravity="center"
+            android:layout_marginRight="80dp"
+            android:layout_marginLeft="20dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/playerOneInfo"
+        android:layout_margin="10dp"
+        android:id="@+id/linearLayout3">
+
+        <TextView
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:text="Game Loser:"
+            android:id="@+id/loserLabelTextView"
+            android:textSize="20sp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="30dp" />
+
+        <!--<Spinner-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:id="@+id/loserSpinner"-->
+            <!--android:layout_weight="1"-->
+            <!--android:spinnerMode="dropdown"-->
+            <!--android:layout_gravity="center_vertical" />-->
+
+        <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/loserSpinner"
+        android:layout_weight="1"
+        android:spinnerMode="dropdown"
+        android:layout_gravity="center_vertical"
+            android:hint="Player Name" />
+
+        <EditText
+            android:layout_width="55dp"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:ems="10"
+            android:id="@+id/loserScoreEditText"
+            android:hint="Score"
+            android:layout_gravity="center"
+            android:layout_marginRight="80dp"
+            android:layout_marginLeft="20dp" />
+    </LinearLayout>
+
+    <Button
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:text="Save Game Result"
+        android:id="@+id/saveButton"
+        android:layout_below="@+id/linearLayout3"
+        android:layout_centerHorizontal="true" />
+
+</RelativeLayout>
