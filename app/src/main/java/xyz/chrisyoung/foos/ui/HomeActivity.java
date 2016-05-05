@@ -9,6 +9,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.firebase.client.Firebase;
@@ -30,12 +32,13 @@ import xyz.chrisyoung.foos.Constants;
 import xyz.chrisyoung.foos.R;
 import xyz.chrisyoung.foos.adapters.HomeFragmentAdapter;
 
-public class HomeActivity extends AppCompatActivity {
+public class HomeActivity extends AppCompatActivity implements View.OnClickListener {
     public static final String TAG = MainActivity.class.getSimpleName();
     private Firebase mFirebaseRef;
 
     @Bind(R.id.welcomeTextView) TextView mWelcomeTextView;
     @Bind(R.id.ratingTextView) TextView mRatingTextView;
+    @Bind(R.id.recordGameButton) Button mRecordGameButton;
 
     FragmentPagerAdapter adapterViewPager;
 
@@ -46,12 +49,11 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         mFirebaseRef = new Firebase(Constants.FIREBASE_URL);
-
         ViewPager vpPager = (ViewPager) findViewById(R.id.vpPager);
         adapterViewPager = new HomeFragmentAdapter(getSupportFragmentManager());
         vpPager.setAdapter(adapterViewPager);
-
         ButterKnife.bind(this);
+        mRecordGameButton.setOnClickListener(this);
 
         Intent intent = getIntent();
         String userEmail = intent.getStringExtra("userEmail");
@@ -59,10 +61,9 @@ public class HomeActivity extends AppCompatActivity {
 
 
         //TRUE SKILL RANKING EXPLORATION
-
         //Creates new players with Ids
-        Player<Integer> player1 = new Player<>(1);
-        Player<Integer> player2 = new Player<>(2);
+        Player<String> player1 = new Player<>("Player 1");
+        Player<String> player2 = new Player<>("Player 2");
 
         GameInfo gameInfo = GameInfo.getDefaultGameInfo();
 
@@ -70,6 +71,7 @@ public class HomeActivity extends AppCompatActivity {
         //Sets up Game with each player on their own team vs each other
         Team team1 = new Team(player1, gameInfo.getDefaultRating());
         Team team2 = new Team(player2, gameInfo.getDefaultRating());
+
         Collection<ITeam> teams = Team.concat(team1, team2);
 
         //Calculates new rating based on rankings of teams... last param of calculateNewRatings.....↓
@@ -81,7 +83,7 @@ public class HomeActivity extends AppCompatActivity {
         Log.d(TAG, "Player 1, game 1: " + player1Rating);
 
         //GAME 2 AGAINST 3RD (NEW) PLAYER
-        Player<Integer> player3 = new Player<Integer>(3);
+        Player<String> player3 = new Player<String>("Player 3");
         Team team3 = new Team(player1, player1Rating);
         Team team4 = new Team(player3, gameInfo.getDefaultRating());
 
@@ -92,6 +94,14 @@ public class HomeActivity extends AppCompatActivity {
         player1Rating = newRatings2.get(player1);
 
         Log.d(TAG, "Player 1, game 2: " + player1Rating);
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (v == mRecordGameButton) {
+            Intent intent = new Intent(HomeActivity.this, RecordGameActivity.class);
+            startActivity(intent);
+        }
     }
 
     @Override
