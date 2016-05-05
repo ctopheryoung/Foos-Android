@@ -11,14 +11,16 @@ public class Game {
     private int winnerScore;
     private int loserScore;
     private Date timeStamp;
+    private String createdBy;
 
     public Game() {}
 
-    public Game(String winner, String loser, int winnerScore, int loserScore) {
+    public Game(String winner, String loser, int winnerScore, int loserScore, String createdBy) {
         this.winner = winner;
         this.loser = loser;
         this.winnerScore = winnerScore;
         this.loserScore = loserScore;
+        this.createdBy = createdBy;
         this.timeStamp = new Date();
     }
 
@@ -61,5 +63,7 @@ public class Game {
     public void setTimeStamp(Date timeStamp) {
         this.timeStamp = timeStamp;
     }
+
+    public String getCreatedBy () { return createdBy; }
 }
 
