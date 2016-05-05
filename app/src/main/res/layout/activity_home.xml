@@ -59,7 +59,7 @@
         android:layout_below="@+id/linearLayout"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_above="@+id/addMatchButton">
+        android:layout_above="@+id/recordGameButton">
 
         <android.support.v4.view.PagerTabStrip
             android:id="@+id/pager_header"
@@ -75,8 +75,8 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Enter a Match"
-        android:id="@+id/addMatchButton"
+        android:text="Record a Game"
+        android:id="@+id/recordGameButton"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:background="@color/colorPrimaryDark"
