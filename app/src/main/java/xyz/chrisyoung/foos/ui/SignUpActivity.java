@@ -52,16 +52,17 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         final String confirmPassword = mConfirmPasswordEditText.getText().toString();
 
         if (firstName.equals("")) {
-            mFirstNameEditText.setError("Please enter your first name.");
+            mFirstNameEditText.setError("Please enter a first name.");
         }
         if (lastName.equals("")) {
-            mLastNameEditText.setError("Please enter your last name.");
+            mLastNameEditText.setError("Please enter a last name.");
         }
-        if (email.equals("")) {
+        if (email.equals("") | !email.matches("^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")) {
             mEmailEditText.setError("Please enter a valid email.");
         }
         if (password.equals("") | !password.equals(confirmPassword)) {
-            mConfirmPasswordEditText.setError("Please enter matching passwords.");
+            mPasswordEditText.setError("Passwords must match.");
+            mConfirmPasswordEditText.setError("Passwords must match.");
         }
 
         //Put logic to check for empty strings and check that passwords match and generate error.
