@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="xyz.chrisyoung.foos">
+
     <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name=".FoosApplication"
         android:allowBackup="true"
@@ -28,7 +30,8 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.MainActivity" />
         </activity>
-        <activity android:name=".ui.HomeActivity"></activity>
+        <activity android:name=".ui.HomeActivity" />
+        <activity android:name=".ui.RecordGameActivity"></activity>
     </application>
 
 </manifest>
