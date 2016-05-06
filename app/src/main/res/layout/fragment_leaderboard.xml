@@ -51,7 +51,7 @@
                 android:layout_centerVertical="true"
                 android:textSize="14sp"
                 android:layout_toLeftOf="@+id/lossesLabelTextView"
-                android:layout_marginRight="12dp"
+                android:layout_marginRight="13dp"
                 android:layout_alignParentBottom="false" />
 
             <TextView

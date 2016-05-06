@@ -46,7 +46,7 @@
                 android:layout_centerVertical="true"
                 android:textSize="18sp"
                 android:layout_toLeftOf="@+id/winsTextView"
-                android:layout_marginRight="40dp"
+                android:layout_marginRight="50dp"
                 android:layout_alignParentBottom="false" />
 
             <TextView
