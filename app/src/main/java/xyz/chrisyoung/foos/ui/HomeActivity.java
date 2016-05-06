@@ -47,12 +47,9 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     private String mUId;
 
     @Bind(R.id.welcomeTextView) TextView mWelcomeTextView;
-    @Bind(R.id.ratingTextView) TextView mRatingTextView;
     @Bind(R.id.recordGameButton) Button mRecordGameButton;
 
     FragmentPagerAdapter adapterViewPager;
-
-    public String[] players = new String[] {"Summer", "Cooper", "Sarah", "Eric", "Chris", "Ben"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
