@@ -5,7 +5,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -17,8 +16,8 @@ import xyz.chrisyoung.foos.models.Game;
 /**
  * Created by topher on 4/29/16.
  */
-public class GameFeedListAdapter extends RecyclerView.Adapter<GameFeedListAdapter.GameViewHolder> {
-    public static final String TAG = GameFeedListAdapter.class.getSimpleName();
+public class GameFeedListAdapter extends RecyclerView.Adapter<GameFeedViewHolder> {
+    public static final String TAG = LeaderboardListAdapter.class.getSimpleName();
     private ArrayList<Game> mGames = new ArrayList<>();
     private Context mContext;
 
@@ -28,32 +27,20 @@ public class GameFeedListAdapter extends RecyclerView.Adapter<GameFeedListAdapte
     }
 
     @Override
-    public GameFeedListAdapter.GameViewHolder onCreateViewHolder(ViewGroup parent, int ViewType) {
+    public GameFeedViewHolder onCreateViewHolder(ViewGroup parent, int ViewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.game_feed_list_item, parent, false);
-        GameViewHolder viewHolder = new GameViewHolder(view);
+        GameFeedViewHolder viewHolder = new GameFeedViewHolder(view, mGames);
         return viewHolder;
     }
 
     @Override
-    public void onBindViewHolder(GameFeedListAdapter.GameViewHolder holder, int position) {
+    public void onBindViewHolder(GameFeedViewHolder holder, int position) {
         holder.bindGame(mGames.get(position));
     }
 
     @Override
-    public int getItemCount() { return mGames.size();}
-
-    public class GameViewHolder extends RecyclerView.ViewHolder {
-        @Bind(R.id.resultTextView) TextView mResultTextView;
-        private Context mContext;
-
-        public GameViewHolder(View itemView) {
-            super(itemView);
-            ButterKnife.bind(this, itemView);
-            mContext = itemView.getContext();
-        }
-
-        public void bindGame(Game game) {
-            mResultTextView.setText(game.getWinner() + " beat " + game.getLoser());
-        }
+    public int getItemCount() {
+        return mGames.size();
     }
+
 }

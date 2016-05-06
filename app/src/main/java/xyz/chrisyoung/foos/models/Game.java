@@ -1,5 +1,7 @@
 package xyz.chrisyoung.foos.models;
 
+import android.text.format.DateUtils;
+
 import java.util.Date;
 
 /**
@@ -10,7 +12,7 @@ public class Game {
     private String loser;
     private int winnerScore;
     private int loserScore;
-    private Date timeStamp;
+    private long timeStamp;
     private String createdBy;
     private String pushId;
 
@@ -22,47 +24,27 @@ public class Game {
         this.winnerScore = winnerScore;
         this.loserScore = loserScore;
         this.createdBy = createdBy;
-        this.timeStamp = new Date();
+        this.timeStamp = System.currentTimeMillis();
     }
 
     public String getWinner() {
         return winner;
     }
 
-    public void setWinner(String winner) {
-        this.winner = winner;
-    }
-
     public String getLoser() {
         return loser;
-    }
-
-    public void setLoser(String loser) {
-        this.loser = loser;
     }
 
     public int getWinnerScore() {
         return winnerScore;
     }
 
-    public void setWinnerScore(int winnerScore) {
-        this.winnerScore = winnerScore;
-    }
-
     public int getLoserScore() {
         return loserScore;
     }
 
-    public void setLoserScore(int loserScore) {
-        this.loserScore = loserScore;
-    }
-
-    public Date getTimeStamp() {
+    public long getTimeStamp() {
         return timeStamp;
-    }
-
-    public void setTimeStamp(Date timeStamp) {
-        this.timeStamp = timeStamp;
     }
 
     public String getCreatedBy () { return createdBy; }
@@ -73,6 +55,10 @@ public class Game {
 
     public void setPushId(String pushId) {
         this.pushId = pushId;
+    }
+
+    public CharSequence displayHumanTime() {
+        return DateUtils.getRelativeTimeSpanString(timeStamp);
     }
 }
 
