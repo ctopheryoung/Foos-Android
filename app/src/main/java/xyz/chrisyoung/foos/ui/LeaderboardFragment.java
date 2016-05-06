@@ -12,37 +12,33 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.firebase.client.Firebase;
+import com.firebase.client.Query;
+
 import java.util.ArrayList;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import xyz.chrisyoung.foos.Constants;
 import xyz.chrisyoung.foos.R;
+import xyz.chrisyoung.foos.adapters.FirebaseLeaderboardListAdapter;
 import xyz.chrisyoung.foos.adapters.LeaderboardListAdapter;
 import xyz.chrisyoung.foos.models.User;
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class LeaderboardFragment extends Fragment {
     public static final String TAG = LeaderboardFragment.class.getSimpleName();
 
-    protected RecyclerView.LayoutManager mLayoutManager;
-    protected LeaderboardListAdapter mLeaderboardListAdapter;
+    private Query mQuery;
+    private Firebase mFirebaseUsersRef;
+    private FirebaseLeaderboardListAdapter mAdapter;
+
+//    protected RecyclerView.LayoutManager mLayoutManager;
+//    protected LeaderboardListAdapter mLeaderboardListAdapter;
+
     @Bind(R.id.leaderboardRecyclerView) RecyclerView mRecyclerView;
 
-    public ArrayList<User> mUsers = new ArrayList<>();
+//    public ArrayList<User> mUsers = new ArrayList<>();
 
-    String[] allUserFirstNames = new String[] {
-            "Chris", "Summer", "Special Agent", "Perry", "Michelle"
-    };
-
-    String[] allUserLastNames = new String [] {
-            "Young", "Brochtrup", "Dale Cooper", "Eisling", "Brecunier"
-    };
-
-    String [] allUserEmails = new String [] {
-            "ctopheryoung@gmail.com", "summer@epicodus.com", "ImADog@doghouse.com", "perry@epicodus.com", "michelle@website.com"
-    };
 
     // newInstance constructor for creating fragment with arguments
     public static LeaderboardFragment newInstance(int page) {
@@ -54,13 +50,13 @@ public class LeaderboardFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        for (int i = 0; i < allUserFirstNames.length; i++) {
-            User user = new User();
-            user.setFirstName(allUserFirstNames[i]);
-            user.setLastName(allUserLastNames[i]);
-            user.setEmail(allUserEmails[i]);
-            mUsers.add(user);
-        }
+//        for (int i = 0; i < allUserFirstNames.length; i++) {
+//            User user = new User();
+//            user.setFirstName(allUserFirstNames[i]);
+//            user.setLastName(allUserLastNames[i]);
+//            user.setEmail(allUserEmails[i]);
+//            mUsers.add(user);
+//        }
     }
 
     @Override
@@ -68,11 +64,27 @@ public class LeaderboardFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_leaderboard, container, false);
         ButterKnife.bind(this, view);
 
-        mLeaderboardListAdapter = new LeaderboardListAdapter(getContext(), mUsers);
-        mRecyclerView.setAdapter(mLeaderboardListAdapter);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
-        mRecyclerView.setLayoutManager(layoutManager);
-        mRecyclerView.setHasFixedSize(true);
+        mFirebaseUsersRef = new Firebase(Constants.FIREBASE_URL_USERS);
+
+        setUpFirebaseQuery();
+        setUpRecyclerView();
+
+//        mLeaderboardListAdapter = new LeaderboardListAdapter(getActivity(), mUsers);
+//        mRecyclerView.setAdapter(mLeaderboardListAdapter);
+//        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
+//        mRecyclerView.setLayoutManager(layoutManager);
+//        mRecyclerView.setHasFixedSize(true);
         return view;
+    }
+
+    private void setUpFirebaseQuery() {
+        String location = mFirebaseUsersRef.toString();
+        mQuery = new Firebase(location);
+    }
+
+    private void setUpRecyclerView() {
+        mAdapter = new FirebaseLeaderboardListAdapter(mQuery, User.class);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mRecyclerView.setAdapter(mAdapter);
     }
 }
