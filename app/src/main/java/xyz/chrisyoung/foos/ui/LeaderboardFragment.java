@@ -32,15 +32,8 @@ public class LeaderboardFragment extends Fragment {
     private Firebase mFirebaseUsersRef;
     private FirebaseLeaderboardListAdapter mAdapter;
 
-//    protected RecyclerView.LayoutManager mLayoutManager;
-//    protected LeaderboardListAdapter mLeaderboardListAdapter;
-
     @Bind(R.id.leaderboardRecyclerView) RecyclerView mRecyclerView;
 
-//    public ArrayList<User> mUsers = new ArrayList<>();
-
-
-    // newInstance constructor for creating fragment with arguments
     public static LeaderboardFragment newInstance(int page) {
         LeaderboardFragment fragmentLeaderboard = new LeaderboardFragment();
         return fragmentLeaderboard;
@@ -49,14 +42,6 @@ public class LeaderboardFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-//        for (int i = 0; i < allUserFirstNames.length; i++) {
-//            User user = new User();
-//            user.setFirstName(allUserFirstNames[i]);
-//            user.setLastName(allUserLastNames[i]);
-//            user.setEmail(allUserEmails[i]);
-//            mUsers.add(user);
-//        }
     }
 
     @Override
@@ -69,11 +54,6 @@ public class LeaderboardFragment extends Fragment {
         setUpFirebaseQuery();
         setUpRecyclerView();
 
-//        mLeaderboardListAdapter = new LeaderboardListAdapter(getActivity(), mUsers);
-//        mRecyclerView.setAdapter(mLeaderboardListAdapter);
-//        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
-//        mRecyclerView.setLayoutManager(layoutManager);
-//        mRecyclerView.setHasFixedSize(true);
         return view;
     }
 
