@@ -12,6 +12,7 @@ public class Game {
     private int loserScore;
     private Date timeStamp;
     private String createdBy;
+    private String pushId;
 
     public Game() {}
 
@@ -65,5 +66,13 @@ public class Game {
     }
 
     public String getCreatedBy () { return createdBy; }
+
+    public String getPushId() {
+        return pushId;
+    }
+
+    public void setPushId(String pushId) {
+        this.pushId = pushId;
+    }
 }
 
