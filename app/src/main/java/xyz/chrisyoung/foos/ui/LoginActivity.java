@@ -27,7 +27,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Bind(R.id.passwordEditText) EditText mPasswordEditText;
     private Firebase mFirebaseRef;
     private SharedPreferences mSharedPreferences;
-    private SharedPreferences.Editor mSharedPreferenceEditor;
+    private SharedPreferences.Editor mSharedPreferencesEditor;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,7 +35,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         ButterKnife.bind(this);
 
         mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(LoginActivity.this);
-        mSharedPreferenceEditor = mSharedPreferences.edit();
+        mSharedPreferencesEditor = mSharedPreferences.edit();
+        String signupEmail = mSharedPreferences.getString(Constants.KEY_USER_EMAIL, null);
+        if (signupEmail != null) {
+            mEmailEditText.setText(signupEmail);
+        }
+
         mFirebaseRef = new Firebase(Constants.FIREBASE_URL);
 
         mLoginButton.setOnClickListener(this);
@@ -49,7 +54,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     public void loginWithPassword() {
-        String email = mEmailEditText.getText().toString();
+        final String email = mEmailEditText.getText().toString();
         String password = mPasswordEditText.getText().toString();
 
         if (email.equals("")) {
@@ -65,7 +70,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             public void onAuthenticated(AuthData authData) {
                 if (authData != null) {
                     String userUid = authData.getUid();
-                    mSharedPreferenceEditor.putString(Constants.KEY_UID, userUid).apply();
+                    mSharedPreferencesEditor.putString(Constants.KEY_UID, userUid).apply();
+                    mSharedPreferencesEditor.putString(Constants.KEY_USER_EMAIL, email).apply();
                     Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);

@@ -62,21 +62,11 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         final String password = mPasswordEditText.getText().toString();
         final String confirmPassword = mConfirmPasswordEditText.getText().toString();
 
-        if (firstName.equals("")) {
-            mFirstNameEditText.setError("Please enter a first name.");
-        }
-        if (lastName.equals("")) {
-            mLastNameEditText.setError("Please enter a last name.");
-        }
-        if (email.equals("") | !email.matches("^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")) {
-            mEmailEditText.setError("Please enter a valid email.");
-        }
-        if (password.equals("") | !password.equals(confirmPassword)) {
-            mPasswordEditText.setError("Passwords must match.");
-            mConfirmPasswordEditText.setError("Passwords must match.");
-        }
-
-        //Put logic to check for empty strings and check that passwords match and generate error.
+        boolean validEmail = isValidEmail(email);
+        boolean validFirstName = isValidFirstName(firstName);
+        boolean validLastName = isValidLastName(lastName);
+        boolean validPassword = isValidPassword(password, confirmPassword);
+        if (!validEmail || !validFirstName || !validPassword || !validLastName) return;
 
         mFirebaseRef.createUser(email, password, new Firebase.ValueResultHandler<Map<String, Object>>() {
             @Override
@@ -91,6 +81,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                         if (authData != null) {
                             String userUid = authData.getUid();
                             mSharedPreferencesEditor.putString(Constants.KEY_UID, userUid).apply();
+                            mSharedPreferencesEditor.putString(Constants.KEY_USER_EMAIL, email).apply();
                             Intent intent = new Intent(SignUpActivity.this, HomeActivity.class);
                             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                             startActivity(intent);
@@ -120,6 +111,9 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
             @Override
             public void onError(FirebaseError firebaseError) {
+                if (firebaseError.toString().equals("FirebaseError: The specified email address is already in use.")) {
+                    mEmailEditText.setError("The specified email address is already in use.");
+                }
                 Log.d(TAG, "Error Occurred! " + firebaseError);
             }
         });
@@ -139,5 +133,42 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
     private void showErrorToast(String message) {
         Toast.makeText(SignUpActivity.this, message, Toast.LENGTH_LONG).show();
+    }
+
+    private boolean isValidEmail(String email) {
+        boolean isGoodEmail =
+                (email != null && android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches());
+        if (!isGoodEmail) {
+            mEmailEditText.setError("Please enter a valid email address");
+            return false;
+        }
+        return isGoodEmail;
+    }
+
+    private boolean isValidFirstName(String firstName) {
+        if (firstName.equals("")) {
+            mFirstNameEditText.setError("Please enter first name");
+            return false;
+        }
+        return true;
+    }
+
+    private boolean isValidLastName(String lastName) {
+        if (lastName.equals("")) {
+            mLastNameEditText.setError("Please enter last name");
+            return false;
+        }
+        return true;
+    }
+
+    private boolean isValidPassword(String password, String confirmPassword) {
+        if (password.length() < 6) {
+            mPasswordEditText.setError("Please create a password containing at least 6 characters");
+            return false;
+        } else if (!password.equals(confirmPassword)) {
+            mPasswordEditText.setError("Passwords do not match");
+            return false;
+        }
+        return true;
     }
 }
