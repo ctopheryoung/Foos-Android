@@ -38,7 +38,6 @@ public class FirebaseLeaderboardListAdapter extends FirebaseRecyclerAdapter<User
 
     @Override
     protected void itemChanged(User oldItem, User newItem, String key, int position) {
-
     }
 
     @Override
