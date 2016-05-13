@@ -65,7 +65,6 @@ public class LeaderboardFragment extends Fragment {
 
     private void setUpRecyclerView() {
         mAdapter = new FirebaseLeaderboardListAdapter(mQuery, User.class);
-        Log.d(TAG, "This is the adapter" + mAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRecyclerView.setAdapter(mAdapter);
     }

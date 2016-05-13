@@ -12,11 +12,8 @@ public class User {
     private String email;
     private Integer wins = 0;
     private Integer losses = 0;
-
-    ////////////////////////////
     private Double mean = 25.0;
     private Double standardDeviation = 8.333333333333334;
-    //Everytime mean and standardDeviation update (i.e. after a match then the following two properties need to be recalculated!
     private Double trueSkill = mean-3*standardDeviation;
     private Double trueSkillInverse = trueSkill*-1;
 
@@ -65,6 +62,7 @@ public class User {
     public Double getMean() {
         return mean;
     }
+
 
     public Double getStandardDeviation() {
         return standardDeviation;
