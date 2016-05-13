@@ -17,8 +17,8 @@ public class User {
     private Double mean = 25.0;
     private Double standardDeviation = 8.333333333333334;
     //Everytime mean and standardDeviation update (i.e. after a match then the following two properties need to be recalculated!
-    private Double trueSkill;
-    private Double trueSkillInverse;
+    private Double trueSkill = mean-3*standardDeviation;
+    private Double trueSkillInverse = trueSkill*-1;
 
     public User() {
     }
@@ -66,15 +66,14 @@ public class User {
         return mean;
     }
 
-    public void setMean(Double mean) {
-        this.mean = mean;
-    }
-
     public Double getStandardDeviation() {
         return standardDeviation;
     }
 
-    public void update(Double standardDeviation) {
+    public void updateRating(Double mean, Double standardDeviation) {
+        this.mean = mean;
         this.standardDeviation = standardDeviation;
+        this.trueSkill = mean-3*standardDeviation;
+        this.trueSkillInverse = trueSkill*-1;
     }
 }

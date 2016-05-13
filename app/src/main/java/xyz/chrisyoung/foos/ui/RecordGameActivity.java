@@ -42,10 +42,15 @@ public class RecordGameActivity extends AppCompatActivity implements View.OnClic
     public void onClick(View view) {
         if (view == mSaveButton) {
             String winner = mWinnerSpinner.getText().toString();
-            Integer winnerScore = Integer.parseInt(mWinnerScoreEditText.getText().toString());
             String loser = mLoserSpinner.getText().toString();
+            Integer winnerScore = Integer.parseInt(mWinnerScoreEditText.getText().toString());
             Integer loserScore = Integer.parseInt(mLoserScoreEditText.getText().toString());
             String userId = mSharedPreferences.getString(Constants.KEY_UID, null);
+
+            // 1. Find both players
+            // 2. Find each players rating
+            // 3. Calculate new ratings
+            // 4. Update ratings and calculate new TrueSkill -> playerObject.updateRating(newMean, newStdDev)
 
             Game newGame = new Game(winner, loser, winnerScore, loserScore, userId);
             saveGameToFirebase(newGame);
@@ -53,9 +58,17 @@ public class RecordGameActivity extends AppCompatActivity implements View.OnClic
     }
 
         public void saveGameToFirebase(Game game) {
-            Firebase addedGameRef = new Firebase(Constants.FIREBASE_URL_GAMES);
-            addedGameRef.push().setValue(game);
+            //Saves game and single entity in "games" child node
+            Firebase gamesRef = new Firebase(Constants.FIREBASE_URL_GAMES);
+            gamesRef.push().setValue(game);
 
+            //Saves game in playerGames child once for each player (with under nodes with winnerID and loserID)
+            Firebase playerGamesRef = new Firebase(Constants.FIREBASE_URL_PLAYER_GAMES);
+            Firebase newGameRef = playerGamesRef.push();
+            String pushId = newGameRef.getKey();
+            game.setPushId(pushId);
+            playerGamesRef.child(game.getWinner()).child(pushId).setValue(game);
+            playerGamesRef.child(game.getLoser()).child(pushId).setValue(game);
     }
 
 }
