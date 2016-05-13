@@ -25,7 +25,7 @@
         android:layout_margin="10dp">
 
         <TextView
-            android:layout_width="130dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Game Winner:"
             android:id="@+id/winnerLabelTextView"
@@ -33,22 +33,22 @@
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="30dp" />
 
-        <!--<Spinner-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:id="@+id/winnerSpinner"-->
-            <!--android:spinnerMode="dropdown"-->
-            <!--android:layout_weight="1"-->
-            <!--android:layout_gravity="center_vertical" />-->
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/winnerSpinner"
+            android:spinnerMode="dropdown"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical" />
 
-        <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/winnerSpinner"
-        android:spinnerMode="dropdown"
-        android:layout_weight="1"
-        android:layout_gravity="center_vertical"
-            android:hint="Player Name" />
+        <!--<EditText-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:id="@+id/winnerSpinner"-->
+        <!--android:spinnerMode="dropdown"-->
+        <!--android:layout_weight="1"-->
+        <!--android:layout_gravity="center_vertical"-->
+            <!--android:hint="Player Name" />-->
 
         <EditText
             android:layout_width="55dp"
