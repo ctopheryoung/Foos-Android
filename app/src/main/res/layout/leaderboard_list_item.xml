@@ -45,7 +45,7 @@
                 android:id="@+id/skillTextView"
                 android:layout_centerVertical="true"
                 android:textSize="18sp"
-                android:layout_toLeftOf="@+id/winsTextView"
+                android:layout_toLeftOf="@+id/recordTextView"
                 android:layout_marginRight="50dp"
                 android:layout_alignParentBottom="false" />
 
@@ -53,7 +53,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="0"
-                android:id="@+id/winsTextView"
+                android:id="@+id/recordTextView"
                 android:layout_centerVertical="true"
                 android:textSize="18sp"
                 android:layout_toLeftOf="@+id/lossesTextView"

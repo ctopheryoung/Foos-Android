@@ -48,6 +48,9 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
     @Bind(R.id.welcomeTextView) TextView mWelcomeTextView;
     @Bind(R.id.recordGameButton) Button mRecordGameButton;
+    @Bind(R.id.recordTextView) TextView mRecordTextView;
+    @Bind(R.id.totalGamesTextView) TextView mTotalGamesTextView;
+    @Bind(R.id.userRatingTextView) TextView mUserRatingTextView;
 
     FragmentPagerAdapter adapterViewPager;
 
@@ -68,6 +71,9 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             public void onDataChange(DataSnapshot dataSnapshot) {
                 User user = dataSnapshot.getValue(User.class);
                 mWelcomeTextView.setText(user.getFullName());
+                mRecordTextView.setText("Wins: "+user.getWins()+"   Losses: "+user.getLosses());
+                Integer totalGames = user.getWins()+user.getLosses();
+                mTotalGamesTextView.setText(totalGames.toString()+" Games Total");
             }
 
             @Override
@@ -100,14 +106,14 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         Map<IPlayer, Rating> newRatings = TrueSkillCalculator.calculateNewRatings(gameInfo, teams, 1, 2);
 
         Rating player1Rating = newRatings.get(player1);
-        Rating player2Rating = newRatings.get(player2);
+        Rating player3Rating = new Rating(30, 2);
 
         Log.d(TAG, "Player 1, game 1: " + player1Rating);
 
         //GAME 2 AGAINST 3RD (NEW) PLAYER
-        Player<String> player3 = new Player<String>("Player 3");
+        Player<String> player3 = new Player("Player 3");
         Team team3 = new Team(player1, player1Rating);
-        Team team4 = new Team(player3, gameInfo.getDefaultRating());
+        Team team4 = new Team(player3, player3Rating);
 
         Collection<ITeam> teams2 = Team.concat(team3, team4);
 

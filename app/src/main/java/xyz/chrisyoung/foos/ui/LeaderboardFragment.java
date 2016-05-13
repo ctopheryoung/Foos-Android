@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,7 +23,7 @@ import butterknife.ButterKnife;
 import xyz.chrisyoung.foos.Constants;
 import xyz.chrisyoung.foos.R;
 import xyz.chrisyoung.foos.adapters.FirebaseLeaderboardListAdapter;
-import xyz.chrisyoung.foos.adapters.LeaderboardListAdapter;
+//import xyz.chrisyoung.foos.adapters.LeaderboardListAdapter;
 import xyz.chrisyoung.foos.models.User;
 
 public class LeaderboardFragment extends Fragment {
@@ -64,6 +65,7 @@ public class LeaderboardFragment extends Fragment {
 
     private void setUpRecyclerView() {
         mAdapter = new FirebaseLeaderboardListAdapter(mQuery, User.class);
+        Log.d(TAG, "This is the adapter" + mAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRecyclerView.setAdapter(mAdapter);
     }

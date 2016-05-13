@@ -20,7 +20,6 @@ import java.util.Map;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import jskills.GameInfo;
-import jskills.Rating;
 import xyz.chrisyoung.foos.Constants;
 import xyz.chrisyoung.foos.R;
 import xyz.chrisyoung.foos.models.User;
@@ -121,14 +120,11 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
     private void createUserInFirebaseHelper(final String firstName, final String lastName, final String email, final String uid) {
         final Firebase userLocation = new Firebase(Constants.FIREBASE_URL_USERS).child(uid);
-        final Firebase ratingLocation = new Firebase(Constants.FIREBASE_URL_RATINGS).child(uid);
         User newUser = new User(firstName, lastName, email);
 
         GameInfo gameInfo = GameInfo.getDefaultGameInfo();
-        Rating defaultRating = gameInfo.getDefaultRating();
 
         userLocation.setValue(newUser);
-        ratingLocation.setValue(defaultRating);
     }
 
     private void showErrorToast(String message) {

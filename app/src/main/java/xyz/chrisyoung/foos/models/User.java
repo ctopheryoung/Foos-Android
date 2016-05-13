@@ -1,5 +1,7 @@
 package xyz.chrisyoung.foos.models;
 
+import jskills.Rating;
+
 /**
  * Created by Guest on 4/28/16.
  */
@@ -8,10 +10,18 @@ public class User {
     private String lastName;
     private String fullName;
     private String email;
-    private int wins = 0;
-    private int losses = 0;
+    private Integer wins = 0;
+    private Integer losses = 0;
 
-    public User() {}
+    ////////////////////////////
+    private Double mean = 25.0;
+    private Double standardDeviation = 8.333333333333334;
+    //Everytime mean and standardDeviation update (i.e. after a match then the following two properties need to be recalculated!
+    private Double trueSkill;
+    private Double trueSkillInverse;
+
+    public User() {
+    }
 
     public User(String firstName, String lastName, String email) {
         this.firstName = firstName;
@@ -24,35 +34,19 @@ public class User {
         return firstName;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
     public String getLastName() {
         return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
     }
 
     public String getFullName() {
         return fullName;
     }
 
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
-    }
-
     public String getEmail() {
         return email;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public int getWins() {
+    public Integer getWins() {
         return wins;
     }
 
@@ -60,11 +54,27 @@ public class User {
         this.wins = wins;
     }
 
-    public int getLosses() {
+    public Integer getLosses() {
         return losses;
     }
 
     public void setLosses(int losses) {
         this.losses = losses;
+    }
+
+    public Double getMean() {
+        return mean;
+    }
+
+    public void setMean(Double mean) {
+        this.mean = mean;
+    }
+
+    public Double getStandardDeviation() {
+        return standardDeviation;
+    }
+
+    public void update(Double standardDeviation) {
+        this.standardDeviation = standardDeviation;
     }
 }

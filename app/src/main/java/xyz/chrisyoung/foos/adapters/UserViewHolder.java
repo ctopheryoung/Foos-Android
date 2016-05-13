@@ -16,12 +16,12 @@ import xyz.chrisyoung.foos.models.User;
  * Created by topher on 5/6/16.
  */
 public class UserViewHolder extends RecyclerView.ViewHolder {
-    @Bind(R.id.rankTextView)
-    TextView mRankTextView;
+    @Bind(R.id.rankTextView) TextView mRankTextView;
     @Bind(R.id.nameTextView) TextView mNameTextView;
     @Bind(R.id.skillTextView) TextView mSkillTextView;
-    @Bind(R.id.winsTextView) TextView mWinsTextView;
+    @Bind(R.id.recordTextView) TextView mWinsTextView;
     @Bind(R.id.lossesTextView) TextView mLossesTextView;
+
     private Context mContext;
     private ArrayList<User> mUsers = new ArrayList<>();
 
@@ -35,6 +35,10 @@ public class UserViewHolder extends RecyclerView.ViewHolder {
         mNameTextView.setText(user.getFullName());
         Integer rank = getAdapterPosition() + 1;
         mRankTextView.setText(rank.toString() + ".");
+        mWinsTextView.setText(user.getWins().toString());
+        mLossesTextView.setText(user.getLosses().toString());
+        Double trueSkill = Math.floor(user.getMean()-3*user.getStandardDeviation());
+        mSkillTextView.setText(trueSkill.toString());
     }
 
 }

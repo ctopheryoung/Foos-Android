@@ -35,12 +35,12 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Skill Points"
+                android:text="TrueSkill"
                 android:id="@+id/skillLabelTextView"
                 android:layout_centerVertical="true"
                 android:textSize="14sp"
                 android:layout_toLeftOf="@+id/winsLabelTextView"
-                android:layout_marginRight="12dp"
+                android:layout_marginRight="25dp"
                 android:layout_alignParentBottom="false" />
 
             <TextView
@@ -51,7 +51,7 @@
                 android:layout_centerVertical="true"
                 android:textSize="14sp"
                 android:layout_toLeftOf="@+id/lossesLabelTextView"
-                android:layout_marginRight="13dp"
+                android:layout_marginRight="14dp"
                 android:layout_alignParentBottom="false" />
 
             <TextView
