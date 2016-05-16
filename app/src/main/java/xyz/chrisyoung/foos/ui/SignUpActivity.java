@@ -121,6 +121,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     private void createUserInFirebaseHelper(final String firstName, final String lastName, final String email, final String uid) {
         final Firebase userLocation = new Firebase(Constants.FIREBASE_URL_USERS).child(uid);
         User newUser = new User(firstName, lastName, email);
+        newUser.setPushId(uid);
         userLocation.setValue(newUser);
     }
 
