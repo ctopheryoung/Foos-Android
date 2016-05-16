@@ -95,4 +95,12 @@ public class User {
         this.trueSkill = mean-3*standardDeviation;
         this.trueSkillInverse = trueSkill*-1;
     }
+
+    public void countWin() {
+        this.wins++;
+    }
+
+    public void countLoss() {
+        this.losses++;
+    }
 }
