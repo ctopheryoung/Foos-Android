@@ -60,7 +60,7 @@ public class LeaderboardFragment extends Fragment {
 
     private void setUpFirebaseQuery() {
         String location = mFirebaseUsersRef.toString();
-        mQuery = new Firebase(location);
+        mQuery = new Firebase(location).orderByChild("trueSkillInverse");
     }
 
     private void setUpRecyclerView() {
