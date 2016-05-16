@@ -8,8 +8,10 @@ import java.util.Date;
  * Created by Guest on 4/28/16.
  */
 public class Game {
-    private String winner;
-    private String loser;
+    private String winnerName;
+    private String winnerId;
+    private String loserName;
+    private String loserId;
     private int winnerScore;
     private int loserScore;
     private long timeStamp;
@@ -18,21 +20,31 @@ public class Game {
 
     public Game() {}
 
-    public Game(String winner, String loser, int winnerScore, int loserScore, String createdBy) {
-        this.winner = winner;
-        this.loser = loser;
+    public Game(String winnerName, String winnerId, String loserName, String loserId, int winnerScore, int loserScore, String createdBy) {
+        this.winnerName = winnerName;
+        this.winnerId = winnerId;
+        this.loserName = loserName;
+        this.loserId = loserId;
         this.winnerScore = winnerScore;
         this.loserScore = loserScore;
         this.createdBy = createdBy;
         this.timeStamp = System.currentTimeMillis();
     }
 
-    public String getWinner() {
-        return winner;
+    public String getWinnerName() {
+        return winnerName;
     }
 
-    public String getLoser() {
-        return loser;
+    public String getWinnerId() {
+        return winnerId;
+    }
+
+    public String getLoserName() {
+        return loserName;
+    }
+
+    public String getLoserId() {
+        return loserId;
     }
 
     public int getWinnerScore() {
