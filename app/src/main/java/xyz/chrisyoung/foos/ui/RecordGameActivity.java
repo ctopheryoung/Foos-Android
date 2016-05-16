@@ -5,24 +5,29 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.Query;
 import com.firebase.client.ValueEventListener;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Map;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import jskills.GameInfo;
+import jskills.IPlayer;
+import jskills.ITeam;
 import jskills.Player;
+import jskills.Rating;
 import jskills.Team;
+import jskills.TrueSkillCalculator;
 import xyz.chrisyoung.foos.Constants;
 import xyz.chrisyoung.foos.R;
 import xyz.chrisyoung.foos.models.Game;
@@ -85,50 +90,36 @@ public class RecordGameActivity extends AppCompatActivity implements View.OnClic
             Integer loserScore = Integer.parseInt(mLoserScoreEditText.getText().toString());
             String currentUserId = mSharedPreferences.getString(Constants.KEY_UID, null);
 
-// This was my attempt at pulling user Ids out of Firebase when I had names in the Spinners.
-//            mWinnerQuery = mFirebaseUsersRef.orderByChild("fullName").equalTo(winnerName);
-//
-//            mWinnerQuery.addChildEventListener(new ChildEventListener() {
-//                @Override
-//                public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-//                    mWinnerId=dataSnapshot.getKey();
-//                    Log.d(TAG, "mWinnerID in Event Listener: " + mWinnerId);
-//                }
-//
-//                @Override
-//                public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-//
-//                }
-//
-//                @Override
-//                public void onChildRemoved(DataSnapshot dataSnapshot) {
-//
-//                }
-//
-//                @Override
-//                public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-//
-//                }
-//
-//                @Override
-//                public void onCancelled(FirebaseError firebaseError) {
-//
-//                }
-//            });
-
-            // 1. Find both players
-            // 2. Find each players rating
-            // 3. Calculate new ratings
-            // 4. Update ratings and calculate new TrueSkill -> playerObject.updateRating(newMean, newStdDev)
-
+            //Setup Winner Player
             Player<User> playerWinner = new Player<>(winner);
-            Player<User> playerLoser = new Player<>(loser);
-            GameInfo gameInfo = GameInfo.getDefaultGameInfo();
+            Rating initialWinnerRating = new Rating(winner.getMean(), winner.getStandardDeviation());
+            Team winnerTeam = new Team(playerWinner, initialWinnerRating);
 
+            //Setup Loser Player
+            Player<User> playerLoser = new Player<>(loser);
+            Rating initialLoserRating = new Rating(loser.getMean(), loser.getStandardDeviation());
+            Team loserTeam = new Team(playerLoser, initialLoserRating);
+
+            //Setup Game
+            GameInfo gameInfo = GameInfo.getDefaultGameInfo();
+            Collection<ITeam> teams = Team.concat(winnerTeam, loserTeam);
+            Map<IPlayer, Rating> newRatings = TrueSkillCalculator.calculateNewRatings(gameInfo, teams, 1, 2);
+
+            //Store Winner Game Results
+            Rating newWinnerRating = newRatings.get(playerWinner);
+            winner.countWin();
+            winner.updateRating(newWinnerRating.getMean(), newWinnerRating.getStandardDeviation());
+            mFirebaseUsersRef.child(winner.getPushId()).setValue(winner);
+
+            //Store Loser Game Results
+            Rating newLoserRating = newRatings.get(playerLoser);
+            loser.countLoss();
+            loser.updateRating(newLoserRating.getMean(), newLoserRating.getStandardDeviation());
+            mFirebaseUsersRef.child(loser.getPushId()).setValue(loser);
+
+            //Store Game Record
             Game newGame = new Game(winner.getFullName(), winner.getPushId(), loser.getFullName(), loser.getPushId(), winnerScore, loserScore, currentUserId);
             saveGameToFirebase(newGame);
-//            updateWinnerScore();
-//            updateLoserScore();
         }
     }
 
