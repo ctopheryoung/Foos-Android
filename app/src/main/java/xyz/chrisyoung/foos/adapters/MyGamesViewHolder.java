@@ -41,12 +41,12 @@ public class MyGamesViewHolder extends RecyclerView.ViewHolder {
         mUId = mSharedPreferences.getString(Constants.KEY_UID, null);
         mTimeTextView.setText(game.displayHumanTime());
         mScoreTextView.setText(game.getWinnerScore() + " to " + game.getLoserScore());
-        if (mUId.equals(game.getWinner())) {
+        if (mUId.equals(game.getWinnerId())) {
             mResultTextView.setText("W");
-            mOutcomeTextView.setText("Defeated " + game.getLoser());
+            mOutcomeTextView.setText("Defeated " + game.getLoserName());
         } else {
             mResultTextView.setText("L");
-            mOutcomeTextView.setText("Lost to " + game.getWinner());
+            mOutcomeTextView.setText("Lost to " + game.getWinnerName());
         }
     }
 }
