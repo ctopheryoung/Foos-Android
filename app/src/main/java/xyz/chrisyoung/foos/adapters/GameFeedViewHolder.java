@@ -30,7 +30,7 @@ public class GameFeedViewHolder extends RecyclerView.ViewHolder {
     }
 
     public void bindGame(Game game) {
-        mResultTextView.setText(game.getWinner() + " beat " + game.getLoser());
+        mResultTextView.setText(game.getWinnerName() + " beat " + game.getLoserName());
         mScoreTextView.setText(game.getWinnerScore() + " to " + game.getLoserScore());
         mTimeTextView.setText(game.displayHumanTime());
     }
