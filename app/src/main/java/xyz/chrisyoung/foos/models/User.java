@@ -16,6 +16,7 @@ public class User {
     private Double standardDeviation = 8.333333333333334;
     private Double trueSkill = mean-3*standardDeviation;
     private Double trueSkillInverse = trueSkill*-1;
+    private String pushId;
 
     public User() {
     }
@@ -66,6 +67,26 @@ public class User {
 
     public Double getStandardDeviation() {
         return standardDeviation;
+    }
+
+    public String getPushId() {
+        return pushId;
+    }
+
+    public void setPushId(String pushId) {
+        this.pushId = pushId;
+    }
+
+    public Double getTrueSkill() {
+        return trueSkill;
+    }
+
+    public Double getTrueSkillInverse() {
+        return trueSkillInverse;
+    }
+
+    public String toString() {
+        return fullName;
     }
 
     public void updateRating(Double mean, Double standardDeviation) {
