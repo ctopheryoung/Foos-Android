@@ -74,6 +74,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 mRecordTextView.setText("Wins: "+user.getWins()+"   Losses: "+user.getLosses());
                 Integer totalGames = user.getWins()+user.getLosses();
                 mTotalGamesTextView.setText(totalGames.toString()+" Games Total");
+                mUserRatingTextView.setText(user.getTrueSkill().toString());
             }
 
             @Override
