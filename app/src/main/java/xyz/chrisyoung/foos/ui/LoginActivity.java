@@ -16,7 +16,7 @@ import com.firebase.client.FirebaseError;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import xyz.chrisyoung.foos.Constants;
+import xyz.chrisyoung.foos.util.Constants;
 import xyz.chrisyoung.foos.R;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {

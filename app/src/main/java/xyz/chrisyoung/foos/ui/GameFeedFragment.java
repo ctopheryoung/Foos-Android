@@ -8,11 +8,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import com.firebase.client.Firebase;
-import com.firebase.client.Query;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import xyz.chrisyoung.foos.Constants;
+import xyz.chrisyoung.foos.util.Constants;
 import xyz.chrisyoung.foos.R;
 import xyz.chrisyoung.foos.adapters.FirebaseGameFeedListAdapter;
 import xyz.chrisyoung.foos.models.Game;
@@ -21,7 +22,7 @@ public class GameFeedFragment extends Fragment {
     public static final String TAG = GameFeedFragment.class.getSimpleName();
 
     private Query mQuery;
-    private Firebase mFirebaseGamesRef;
+    private DatabaseReference mFirebaseGamesRef;
     private FirebaseGameFeedListAdapter mAdapter;
 
     @Bind(R.id.gameFeedRecyclerView) RecyclerView mRecyclerView;
@@ -41,7 +42,7 @@ public class GameFeedFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_game_feed, container, false);
         ButterKnife.bind(this, view);
 
-        mFirebaseGamesRef = new Firebase(Constants.FIREBASE_URL_GAMES);
+        mFirebaseGamesRef = FirebaseDatabase.getInstance().getReference().child("games");
 
         setUpFirebaseQuery();
         setUpRecyclerView();
@@ -50,8 +51,7 @@ public class GameFeedFragment extends Fragment {
     }
 
     private void setUpFirebaseQuery() {
-        String location = mFirebaseGamesRef.toString();
-        mQuery = new Firebase(location);
+        mQuery = mFirebaseGamesRef;
     }
 
     private void setUpRecyclerView() {

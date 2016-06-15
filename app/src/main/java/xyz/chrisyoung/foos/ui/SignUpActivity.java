@@ -19,8 +19,7 @@ import java.util.Map;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import jskills.GameInfo;
-import xyz.chrisyoung.foos.Constants;
+import xyz.chrisyoung.foos.util.Constants;
 import xyz.chrisyoung.foos.R;
 import xyz.chrisyoung.foos.models.User;
 

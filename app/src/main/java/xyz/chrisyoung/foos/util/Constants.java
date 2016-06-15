@@ -1,4 +1,6 @@
-package xyz.chrisyoung.foos;
+package xyz.chrisyoung.foos.util;
+
+import xyz.chrisyoung.foos.BuildConfig;
 
 /**
  * Created by topher on 5/4/16.

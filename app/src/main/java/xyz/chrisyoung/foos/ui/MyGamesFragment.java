@@ -10,14 +10,14 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
-import com.firebase.client.Firebase;
-import com.firebase.client.Query;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import xyz.chrisyoung.foos.Constants;
+import xyz.chrisyoung.foos.util.Constants;
 import xyz.chrisyoung.foos.R;
 import xyz.chrisyoung.foos.adapters.FirebaseMyGamesListAdapter;
 import xyz.chrisyoung.foos.models.Game;
@@ -28,7 +28,7 @@ import xyz.chrisyoung.foos.models.Game;
 public class MyGamesFragment extends Fragment {
     public static final String TAG = GameFeedFragment.class.getSimpleName();
     private Query mQuery;
-    private Firebase mFirebasePlayerGamesRef;
+    private DatabaseReference mFirebasePlayerGamesRef;
     private FirebaseMyGamesListAdapter mAdapter;
     private SharedPreferences mSharedPreferences;
 
@@ -47,7 +47,8 @@ public class MyGamesFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_my_games, container, false);
         ButterKnife.bind(this, view);
         mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        mFirebasePlayerGamesRef = new Firebase(Constants.FIREBASE_URL_PLAYER_GAMES);
+
+        mFirebasePlayerGamesRef = FirebaseDatabase.getInstance().getReference().child("playerGames");
 
         setUpFirebaseQuery();
         setUpRecyclerView();
@@ -57,8 +58,7 @@ public class MyGamesFragment extends Fragment {
 
     private void setUpFirebaseQuery() {
         String userUid = mSharedPreferences.getString(Constants.KEY_UID, null);
-        String location = mFirebasePlayerGamesRef.child(userUid).toString();
-        mQuery = new Firebase(location);
+        mQuery = mFirebasePlayerGamesRef.child(userUid);
     }
 
     private void setUpRecyclerView() {

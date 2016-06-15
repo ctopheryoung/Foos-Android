@@ -15,23 +15,24 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.firebase.client.DataSnapshot;
-import com.firebase.client.Firebase;
-import com.firebase.client.FirebaseError;
-import com.firebase.client.ValueEventListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-
-import xyz.chrisyoung.foos.Constants;
+import xyz.chrisyoung.foos.util.Constants;
 import xyz.chrisyoung.foos.R;
 import xyz.chrisyoung.foos.adapters.HomeFragmentAdapter;
 import xyz.chrisyoung.foos.models.User;
 
 public class HomeActivity extends AppCompatActivity implements View.OnClickListener {
     public static final String TAG = MainActivity.class.getSimpleName();
-    private Firebase mFirebaseRef;
-    private Firebase mUsersRef;
+    private DatabaseReference mFirebaseRef;
+    private DatabaseReference mUsersRef;
     private ValueEventListener mUserRefListener;
     private SharedPreferences mSharedPreferences;
     private String mUId;
@@ -50,11 +51,12 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_home);
         ButterKnife.bind(this);
 
-        mFirebaseRef = new Firebase(Constants.FIREBASE_URL);
+        mFirebaseRef = FirebaseDatabase.getInstance().getReference();
 
         mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         mUId = mSharedPreferences.getString(Constants.KEY_UID, null);
-        mUsersRef = new Firebase(Constants.FIREBASE_URL_USERS).child(mUId);
+
+        mUsersRef = FirebaseDatabase.getInstance().getReference().child("users").child(mUId);
 
         mUserRefListener = mUsersRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -68,7 +70,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             }
 
             @Override
-            public void onCancelled(FirebaseError firebaseError) {
+            public void onCancelled(DatabaseError firebaseError) {
                 Log.d(TAG, "Read failed");
             }
         });
@@ -106,7 +108,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     protected void logout() {
-        mFirebaseRef.unauth();
+        FirebaseAuth.getInstance().signOut();
         takeUserToMainOnUnAuth();
     }
 

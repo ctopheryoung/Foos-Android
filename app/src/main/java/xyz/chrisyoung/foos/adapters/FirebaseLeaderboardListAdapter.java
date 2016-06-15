@@ -3,9 +3,7 @@ package xyz.chrisyoung.foos.adapters;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import com.firebase.client.Query;
-
+import com.google.firebase.database.Query;
 import xyz.chrisyoung.foos.R;
 import xyz.chrisyoung.foos.models.User;
 import xyz.chrisyoung.foos.util.FirebaseRecyclerAdapter;

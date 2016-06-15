@@ -10,15 +10,9 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import com.firebase.client.DataSnapshot;
-import com.firebase.client.Firebase;
-import com.firebase.client.FirebaseError;
-import com.firebase.client.Query;
-import com.firebase.client.ValueEventListener;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Map;
-
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import jskills.GameInfo;
@@ -28,15 +22,23 @@ import jskills.Player;
 import jskills.Rating;
 import jskills.Team;
 import jskills.TrueSkillCalculator;
-import xyz.chrisyoung.foos.Constants;
+import xyz.chrisyoung.foos.util.Constants;
 import xyz.chrisyoung.foos.R;
 import xyz.chrisyoung.foos.models.Game;
 import xyz.chrisyoung.foos.models.User;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
+
 public class RecordGameActivity extends AppCompatActivity implements View.OnClickListener {
     private static final String TAG = RecordGameActivity.class.getSimpleName();
     private SharedPreferences mSharedPreferences;
-    private Firebase mFirebaseUsersRef;
+    private DatabaseReference mFirebaseUsersRef;
     private Query mWinnerQuery;
     private String mWinnerId;
     private String mLoserId;
@@ -54,7 +56,7 @@ public class RecordGameActivity extends AppCompatActivity implements View.OnClic
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_record_game);
         ButterKnife.bind(this);
-        mFirebaseUsersRef = new Firebase(Constants.FIREBASE_URL_USERS);
+        mFirebaseUsersRef = FirebaseDatabase.getInstance().getReference().child("users");
         mSaveButton.setOnClickListener(this);
         mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         setUpSpinners();
@@ -75,7 +77,7 @@ public class RecordGameActivity extends AppCompatActivity implements View.OnClic
             }
 
             @Override
-            public void onCancelled(FirebaseError firebaseError) {
+            public void onCancelled(DatabaseError firebaseError) {
             }
         });
     }
@@ -125,14 +127,14 @@ public class RecordGameActivity extends AppCompatActivity implements View.OnClic
 
     public void saveGameToFirebase(Game game) {
         //Saves game and single entity in "games" child node
-        Firebase gamesRef = new Firebase(Constants.FIREBASE_URL_GAMES);
-        Firebase newGameRef = gamesRef.push();
+        DatabaseReference gamesRef = FirebaseDatabase.getInstance().getReference().child("games");
+        DatabaseReference newGameRef = gamesRef.push();
         String pushId = newGameRef.getKey();
         game.setPushId(pushId);
         newGameRef.setValue(game);
 
         //Saves game in playerGames child once for each player (with under nodes with winnerID and loserID)
-        Firebase playerGamesRef = new Firebase(Constants.FIREBASE_URL_PLAYER_GAMES);
+        DatabaseReference playerGamesRef = FirebaseDatabase.getInstance().getReference().child("playerGames");
         playerGamesRef.child(game.getWinnerId()).child(pushId).setValue(game);
         playerGamesRef.child(game.getLoserId()).child(pushId).setValue(game);
     }
