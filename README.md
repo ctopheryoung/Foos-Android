@@ -11,7 +11,8 @@ Foos is an Android mobile app that includes an implementation of the TrueSkill r
 This is an Epicodus project to demonstrate and practice Android development concepts. It is meant to serve as a project that is built on each week, implementing concepts and functionality as they are learned. I have continued to develop the app post-Epicodus and am excited in continue adding features. If interested in contibuting, please feel free to submit a pull request and/or reach out to me at ctopheryoung@gmail.com.
 
 ## How to use Foos
-First, you will need to create an account and sign in to use the app. Once you are signed in, you can browse recent matches, view the leaderboard, and enter matches between two players.
+Download Foos to your Android device: https://play.google.com/store/apps/details?id=xyz.chrisyoung.foos
+You will need to create an account and sign in to use the app. Once you are signed in, you can browse recent matches, view the leaderboard, and enter matches between two players.
 
 ## Setup/Installation Requirements
 You will need the following programs installed on your computer.
