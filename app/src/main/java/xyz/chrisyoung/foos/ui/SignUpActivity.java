@@ -3,6 +3,7 @@ package xyz.chrisyoung.foos.ui;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,9 +12,13 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.firebase.client.AuthData;
-import com.firebase.client.Firebase;
-import com.firebase.client.FirebaseError;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Map;
 
@@ -31,7 +36,9 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     @Bind(R.id.passwordEditText) EditText mPasswordEditText;
     @Bind(R.id.confirmPasswordEditText) EditText mConfirmPasswordEditText;
     @Bind(R.id.loginTextView) TextView mLoginTextView;
-    private Firebase mFirebaseRef;
+    private DatabaseReference mFirebaseRef;
+    private FirebaseAuth mAuth;
+    private FirebaseAuth.AuthStateListener mAuthListener;
     private SharedPreferences.Editor mSharedPreferencesEditor;
     private SharedPreferences mSharedPreferences;
 
@@ -42,7 +49,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
         ButterKnife.bind(this);
-        mFirebaseRef = new Firebase(Constants.FIREBASE_URL);
+        mFirebaseRef = FirebaseDatabase.getInstance().getReference();
         mLoginTextView.setOnClickListener(this);
     }
 
@@ -50,6 +57,20 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     public void onClick(View view) {
         if (view == mLoginTextView) {
             createNewUser();
+        }
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        mAuth.addAuthStateListener(mAuthListener);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (mAuthListener != null) {
+            mAuth.removeAuthStateListener(mAuthListener);
         }
     }
 
@@ -66,66 +87,20 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         boolean validPassword = isValidPassword(password, confirmPassword);
         if (!validEmail || !validFirstName || !validPassword || !validLastName) return;
 
-        mFirebaseRef.createUser(email, password, new Firebase.ValueResultHandler<Map<String, Object>>() {
-            @Override
-            public void onSuccess(Map<String, Object> result) {
-                String uid = result.get("uid").toString();
-                createUserInFirebaseHelper(firstName, lastName, email, uid);
-
-                mFirebaseRef.authWithPassword(email, password, new Firebase.AuthResultHandler() {
-
+        mAuth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
-                    public void onAuthenticated(AuthData authData) {
-                        if (authData != null) {
-                            String userUid = authData.getUid();
-                            mSharedPreferencesEditor.putString(Constants.KEY_UID, userUid).apply();
-                            mSharedPreferencesEditor.putString(Constants.KEY_USER_EMAIL, email).apply();
-                            Intent intent = new Intent(SignUpActivity.this, HomeActivity.class);
-                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                            startActivity(intent);
-                            finish();
-                        }
-                    }
-
-                    @Override
-                    public void onAuthenticationError(FirebaseError firebaseError) {
-                        switch (firebaseError.getCode()) {
-                            case FirebaseError.INVALID_EMAIL:
-                            case FirebaseError.USER_DOES_NOT_EXIST:
-                                mEmailEditText.setError("There was a problem finding that email, please try again.");
-                                break;
-                            case FirebaseError.INVALID_PASSWORD:
-                                mEmailEditText.setError(firebaseError.getMessage());
-                                break;
-                            case FirebaseError.NETWORK_ERROR:
-                                showErrorToast("There was a problem with the network connection.");
-                                break;
-                            default:
-                                showErrorToast(firebaseError.toString());
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        Toast.makeText(SignUpActivity.this, "Success.",
+                                Toast.LENGTH_SHORT).show();
+                        if (!task.isSuccessful()) {
+                            Toast.makeText(SignUpActivity.this, "Authentication failed, try again.",
+                                    Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
-            }
 
-            @Override
-            public void onError(FirebaseError firebaseError) {
-                if (firebaseError.toString().equals("FirebaseError: The specified email address is already in use.")) {
-                    mEmailEditText.setError("The specified email address is already in use.");
-                }
-                Log.d(TAG, "Error Occurred! " + firebaseError);
-            }
-        });
-    }
 
-    private void createUserInFirebaseHelper(final String firstName, final String lastName, final String email, final String uid) {
-        final Firebase userLocation = new Firebase(Constants.FIREBASE_URL_USERS).child(uid);
-        User newUser = new User(firstName, lastName, email);
-        newUser.setPushId(uid);
-        userLocation.setValue(newUser);
-    }
-
-    private void showErrorToast(String message) {
-        Toast.makeText(SignUpActivity.this, message, Toast.LENGTH_LONG).show();
     }
 
     private boolean isValidEmail(String email) {
