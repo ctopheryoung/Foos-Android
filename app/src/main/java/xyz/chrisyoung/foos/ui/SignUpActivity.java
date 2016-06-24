@@ -31,7 +31,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     @Bind(R.id.passwordEditText) EditText mPasswordEditText;
     @Bind(R.id.confirmPasswordEditText) EditText mConfirmPasswordEditText;
     @Bind(R.id.loginTextView) TextView mLoginTextView;
-    private DatabaseReference mFirebaseRef;
+    private DatabaseReference mFirebaseUsersRef;
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private SharedPreferences.Editor mSharedPreferencesEditor;
@@ -43,7 +43,6 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         setContentView(R.layout.activity_sign_up);
         ButterKnife.bind(this);
         mAuth = FirebaseAuth.getInstance();
-        mFirebaseRef = FirebaseDatabase.getInstance().getReference();
         mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         mSharedPreferencesEditor = mSharedPreferences.edit();
         mLoginTextView.setOnClickListener(this);
@@ -59,6 +58,13 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                 }
             }
         };
+    }
+
+    private void createUserInFirebaseHelper(final String firstName, final String lastName, final String email, final String uid) {
+        mFirebaseUsersRef = FirebaseDatabase.getInstance().getReference().child("users").child(uid);
+        User newUser = new User(firstName, lastName, email);
+        newUser.setPushId(uid);
+        mFirebaseUsersRef.setValue(newUser);
     }
 
     @Override
@@ -99,6 +105,8 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
+                        String uid = mAuth.getCurrentUser().getUid();
+                        createUserInFirebaseHelper(firstName, lastName, email, uid);
                         Toast.makeText(SignUpActivity.this, "Success.",
                                 Toast.LENGTH_SHORT).show();
                         if (!task.isSuccessful()) {
@@ -118,7 +126,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
             mEmailEditText.setError("Please enter a valid email address");
             return false;
         }
-        return isGoodEmail;
+        return true;
     }
 
     private boolean isValidFirstName(String firstName) {

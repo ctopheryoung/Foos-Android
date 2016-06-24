@@ -32,9 +32,10 @@ import xyz.chrisyoung.foos.models.User;
 public class HomeActivity extends AppCompatActivity implements View.OnClickListener {
     public static final String TAG = MainActivity.class.getSimpleName();
     private DatabaseReference mFirebaseRef;
-    private DatabaseReference mUsersRef;
+    private DatabaseReference mUserRef;
     private ValueEventListener mUserRefListener;
     private SharedPreferences mSharedPreferences;
+    private FirebaseAuth mAuth;
     private String mUId;
 
     @Bind(R.id.welcomeTextView) TextView mWelcomeTextView;
@@ -51,14 +52,16 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_home);
         ButterKnife.bind(this);
 
+
         mFirebaseRef = FirebaseDatabase.getInstance().getReference();
+        mAuth = FirebaseAuth.getInstance();
 
         mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        mUId = mSharedPreferences.getString(Constants.KEY_UID, null);
+        mUId = mAuth.getCurrentUser().getUid();
 
-        mUsersRef = FirebaseDatabase.getInstance().getReference().child("users").child(mUId);
+        mUserRef = FirebaseDatabase.getInstance().getReference().child("users").child(mUId);
 
-        mUserRefListener = mUsersRef.addValueEventListener(new ValueEventListener() {
+        mUserRefListener = mUserRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 User user = dataSnapshot.getValue(User.class);

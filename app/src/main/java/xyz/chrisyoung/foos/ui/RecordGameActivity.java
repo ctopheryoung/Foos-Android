@@ -1,6 +1,7 @@
 package xyz.chrisyoung.foos.ui;
 
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -122,6 +123,9 @@ public class RecordGameActivity extends AppCompatActivity implements View.OnClic
             //Store Game Record
             Game newGame = new Game(winner.getFullName(), winner.getPushId(), loser.getFullName(), loser.getPushId(), winnerScore, loserScore, currentUserId);
             saveGameToFirebase(newGame);
+
+            Intent intent = new Intent(RecordGameActivity.this, HomeActivity.class);
+            startActivity(intent);
         }
     }
 
