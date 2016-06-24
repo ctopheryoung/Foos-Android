@@ -14,7 +14,9 @@
         android:textSize="40sp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="30dp" />
+        android:layout_marginBottom="30dp"
+        android:textColor="@color/colorPrimaryDark"
+        android:textStyle="bold" />
 
     <LinearLayout
         android:id="@+id/winnerInfo"
@@ -25,7 +27,7 @@
         android:layout_margin="10dp">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="130dp"
             android:layout_height="wrap_content"
             android:text="Game Winner:"
             android:id="@+id/winnerLabelTextView"
@@ -61,7 +63,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/winnerInfo"
         android:layout_margin="10dp"
-        android:id="@+id/loserInfo">
+        android:id="@+id/loserInfo"
+        android:layout_marginTop="20dp">
 
         <TextView
             android:layout_width="130dp"
@@ -95,9 +98,12 @@
     <Button
         android:layout_width="280dp"
         android:layout_height="wrap_content"
-        android:text="Save Game Result"
+        android:text="Save Game"
         android:id="@+id/saveButton"
         android:layout_below="@+id/loserInfo"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:background="@color/colorAccent"
+        android:textColor="@color/colorPrimaryLight"
+        android:textSize="25sp" />
 
 </RelativeLayout>
